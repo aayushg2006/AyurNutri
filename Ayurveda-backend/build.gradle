@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.5'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.ayurveda'
+version = '0.0.1-SNAPSHOT'
+description = 'Ayurveda Diet plan generator'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Core Spring Boot for web applications, REST controllers, and RestTemplate
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // For database access with JPA and Hibernate
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // For Spring Security (even if set to 'permit all' for the MVP)
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // For validating request DTOs
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // PostgreSQL database driver
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // Reduces boilerplate code (getters, setters, etc.)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // For DTO-to-Entity mapping
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    // For testing your application
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
